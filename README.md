@@ -12,4 +12,4 @@ the pdf and tries to figure out how long the user can read the pdf
 [] command line arguments
 [] use average person reading speed as rate
 [] get random excerpt for user to read
-[] works with all documents
+[] works with all documents 
