@@ -1,13 +1,20 @@
 import PyPDF2
 import sys
 import time
+import random
+
 testFile = 'test.pdf'
 def getArgs():
     argv = sys.argv
     arguments = []
     for i in range(len(argv)-1):
-        arguments.append(argv[i+1])
-    
+
+        #rate
+        if(argv[i+1] == "-r"):
+            arguments.append(["r",argv[i+2]])
+
+        if(argv[i+1] == "-i"):
+            arguments.append(["i",argv[i+2]])
     return arguments
 
 def getTextFromPdf(filename):
@@ -26,8 +33,8 @@ def pdfWordCount(content):
     return wordsLength
 
 def getParagraphExcerpt(content):
-   pass
-   #TODO: this
+    # TODO: this needs to be done
+    pass
 
 def wordsPerMinute(wordCount,minute):
     return wordCount/minute
@@ -35,7 +42,6 @@ def wordsPerMinute(wordCount,minute):
 def getReadingRate(): #TODO: find a better function name
 
     text = "" # get an exerpt somewhere
-
     begin = time.time()
 
 
@@ -46,11 +52,6 @@ def getReadingRate(): #TODO: find a better function name
     final = end - begin
     print(final)
 
-
-print(getParagraphExcerpt(getTextFromPdf(testFile)))
-
-
-
-
+print(getArgs())
 
 
