@@ -32,6 +32,10 @@ def getArgs():
 def argsLength(args):
     return len(args)
 
+def getArgsValue(arguments,value):
+    for i in arguments:
+        if(i[0] == value):
+            return i[1]
 
 def pdfWordCount(content):
     combined = ""
@@ -48,7 +52,7 @@ def getParagraphExcerpt(content):
 def wordsPerMinute(wordCount,minute):
     return wordCount/minute
 
-def getReadingRate(): #TODO: find a better function name
+def getReadingRate():
 
     text = "" # get an exerpt somewhere
     begin = time.time()
@@ -64,12 +68,20 @@ def getReadingRate(): #TODO: find a better function name
 def main():
 
     # shows the help page when need more requirements
-    if(argsLength(getArgs()) == 0):
-        print("Need more Arguments!")
+    if(getArgsValue(getArgs(),"i") == None or argsLength(getArgs()) > 2):
+        print("Check your Arguments")
         argumentHelp()
         exit(0)
+    #TODO: add a try catch for when file does not exist
+    filename = getArgsValue(getArgs(),"i")
 
 
+    if((getArgsValue(getArgs(),"r") not None) and (getArgsValue(getArgs(),"r").isdigit()) ):
+        #TODO: skips the reading test
+        pass
+    #TODO: add a try catch for when the input is not a digit
+
+    print(filename)
 if(__name__=="__main__"):
     main()
 
