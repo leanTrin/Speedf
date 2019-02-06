@@ -99,6 +99,8 @@ def main():
     #skip the reading test
     if(getArgsValue(getArgs(),"r") != None):
         # calculate the length to read the document
+        wpm = wordsPerMinute(pdfWordCount(getTextFromPdf(filename)), int(getArgsValue(getArgs(),"r")))
+        print(timeToReadPdf(wpm))
         exit(0)
         
 
