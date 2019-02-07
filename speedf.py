@@ -73,6 +73,16 @@ def getReadingRate():
     final = end - begin
     print(final)
 
+def formatTime(minute):
+    seconds = minute*60
+    m, s = divmod(seconds, 60)
+    h, m = divmod(m, 60)
+    d, h = divmod(h,24)
+    date = ("%dd %dh%02dm%02ds" % (d ,h, m, s))
+    return date
+            
+def test():
+    formatTime(200)
 def main():
 
     # shows the help page when need more requirements
@@ -99,6 +109,8 @@ def main():
     #skip the reading test
     if(getArgsValue(getArgs(),"r") != None):
         # calculate the length to read the document
+        pdfTime = ( pdfWordCount(getTextFromPdf(filename)) ) / ( int( getArgsValue(getArgs(), "r")) )
+        print("You can finish the book '%s' in about %s" % (filename.strip(".pdf"),formatTime(pdfTime)))
         exit(0)
         
 

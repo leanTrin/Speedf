@@ -10,8 +10,7 @@ the pdf and tries to figure out how long the user can read the pdf
 
 ## Coming Soon
 [x] command line arguments
-[] use average person reading speed as rate
+[] reading test to see words per minute
 [] get random excerpt for user to read
 [] works with all documents
-
-
+[x] have seperate argument for already known speed of user
