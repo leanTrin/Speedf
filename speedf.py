@@ -88,7 +88,6 @@ def getReadingRate():
     try:
         text = getSubmissions(1)[0]
     except Exception as e:
-        print(e)
         print("Ok.")
         text = """Nearby are services that provide food, fuel, repairs, and entertainment. Drivein theaters and fast food chains abound. Waterfront businesses have docks built for those arriving by boat to do their shopping, laundry, or to transfer suitcases from the family car. The local merchants deliver goods to the cabin by road or by water. Entrepreneurs make a businesss of servicing and maintaining cabins during the owners absence in the off seasons. Most of these "cottages", whether on the lake shore, or located five well paved streets from the water, rival the homes of many city dwellers. These lake side communities, although seasonal, differ little from the urban living from which they offer escape."""
 
@@ -171,4 +170,4 @@ def main():
 
 
 if(__name__=="__main__"):
-    main()
+   main()
