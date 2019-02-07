@@ -8,6 +8,12 @@ the pdf that the person wants to read. It then gives the user sample
 text to read and calculates the words per minute. It then goes through
 the pdf and tries to figure out how long the user can read the pdf
 
+### Febuary 6 2019 Update
+- finished program
+- added reading test
+- added reddit /r/todayilearned subreddit for reading test text
+- removed bug where it crashes when runned without arguments
+- removed bug where it crashes when you put a 'filename' that is not a pdf
 
 ## Required Addtions
 [x] command line arguments
