@@ -110,11 +110,10 @@ def test():
     pass
 def main():
     print("Loading...")
+    
     arguments = getArgs()
     filename = getArgsValue(arguments,"i")
     rate = getArgsValue(arguments,"r")
-    pdfText = getTextFromPdf(filename) 
-    
     
     # shows the help page when need more requirements
     if(filename == None or argsLength(arguments) > 2):
@@ -135,7 +134,14 @@ def main():
         argumentHelp()
         exit(0)
 
-
+    pdfText = ""
+    try:
+        pdfText = getTextFromPdf(filename) 
+    except Exception as e:
+        print(e)
+        print("That might not be a pdf")
+        argumentHelp()
+        exit(0)
     ###########
     #   MAIN PROGRAM
     ####################
