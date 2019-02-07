@@ -3,8 +3,31 @@ import sys
 import os
 import time
 import random
+# Reddit imports
+import praw
 
-testFile = 'test.pdf'
+#Reddit functions
+
+subReddit = 'todayilearned'
+reddit = praw.Reddit(client_id='3QBnDb_NxGrPBA',
+                     client_secret='s531SAL5eUWGk4O_sXQ4WcOozFc',
+                        user_agent='my user agent')
+
+def getSubmissions(amount):
+# get random submisions
+    data = []
+    while(len(data) < amount):
+        submission = reddit.subreddit(subReddit).random()
+        while(submission.title in data or len(submission.title) < 100):
+            submission = reddit.subreddit(subReddit).random()
+        data.append(submission.title)
+
+    for i in range(len(data)):
+        data[i] = str.replace(data[i],"TIL","Today I learned")
+    return data
+
+##End of Reddit Functions###################
+
 
 def argumentHelp():
     print("help: ")
@@ -61,20 +84,22 @@ def timeToReadPdf(wpm):
     return 1/wpm
 
 def getReadingRate():
-
-    text = "" # get an exerpt somewhere
+    print("Please Wait...")
+    
+    text = getSubmissions(1)[0]
+    print("A paragraph will appear in front of you. Read it then as soon as you are done, press <return> to continue")
+    print("[-] keep your hand on the button")
+    input("\nPress <return> to show the text")
+    
     begin = time.time()
-
-
+    print("\n")
     print(text)
-    input("[RETURN]")
+    input("\nPress <return> to continue")
 
     end = time.time()
     final = end - begin
-    print(final)
-
-def formatTime(minute):
-    seconds = minute*60
+    return [pdfWordCount(text),final/60]
+def formatTime(seconds):
     m, s = divmod(seconds, 60)
     h, m = divmod(m, 60)
     d, h = divmod(h,24)
@@ -82,39 +107,56 @@ def formatTime(minute):
     return date
             
 def test():
-    formatTime(200)
+    pass
 def main():
-
+    print("Loading...")
+    arguments = getArgs()
+    filename = getArgsValue(arguments,"i")
+    rate = getArgsValue(arguments,"r")
+    pdfText = getTextFromPdf(filename) 
+    
+    
     # shows the help page when need more requirements
-    if(getArgsValue(getArgs(),"i") == None or argsLength(getArgs()) > 2):
+    if(filename == None or argsLength(arguments) > 2):
         print("[!] Check your Arguments")
         argumentHelp()
         exit(0)
 
     #checks if rate arguments is a number
-    if(getArgsValue(getArgs(),"r") != None):
-        if(not getArgsValue(getArgs(),"r").isdigit()):
+    if(rate != None):
+        if(not rate.isdigit()):
             print("[!] rate must be a number")
             argumentHelp()
             exit(0)
 
     # check if file exists
-    if (not (fileExist(getArgsValue(getArgs(),"i")))):
-        print("[!] " + getArgsValue(getArgs(),"i") + " does not exist")
+    if (not (fileExist(filename))):
+        print("[!] " + filename + " does not exist")
         argumentHelp()
         exit(0)
-    
-    filename = getArgsValue(getArgs(),"i")
+
+
+    ###########
+    #   MAIN PROGRAM
+    ####################
 
     #skip the reading test
-    if(getArgsValue(getArgs(),"r") != None):
+    if(rate != None):
         # calculate the length to read the document
-        pdfTime = ( pdfWordCount(getTextFromPdf(filename)) ) / ( int( getArgsValue(getArgs(), "r")) )
+        pdfTime = ( pdfWordCount(pdfText) ) / ( int( rate ) )
+        pdfTime = pdfTime * 60 # Turns minutes to seconds
         print("You can finish the book '%s' in about %s" % (filename.strip(".pdf"),formatTime(pdfTime)))
         exit(0)
-        
+    else:
+        # TODO: if the uese needs a reading test
+        #       Maybe get a paragraph from 'todayilearned' reddit pag
+        print("Ok.")
+        readRate = getReadingRate()
+        pdfTime = ( (pdfWordCount(pdfText) * (readRate[1]) ) / ( readRate[0]) ) * 60 
+        print("\nYou can finish the book '%s' in about %s" % (filename.strip(".pdf"),formatTime(pdfTime)))
+        exit(0)
+
+
 
 if(__name__=="__main__"):
     main()
-
-

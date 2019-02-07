@@ -8,9 +8,13 @@ the pdf that the person wants to read. It then gives the user sample
 text to read and calculates the words per minute. It then goes through
 the pdf and tries to figure out how long the user can read the pdf
 
-## Coming Soon
+
+## Required Addtions
 [x] command line arguments
-[] reading test to see words per minute
-[] get random excerpt for user to read
+[x] reading test to see words per minute
+[x] get random excerpt for user to read
+
+
+## Want to add
 [] works with all documents
 [x] have seperate argument for already known speed of user
