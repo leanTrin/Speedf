@@ -16,11 +16,11 @@ the pdf and tries to figure out how long the user can read the pdf
 - removed bug where it crashes when you put a 'filename' that is not a pdf
 
 ## Required Addtions
-[x] command line arguments
-[x] reading test to see words per minute
-[x] get random excerpt for user to read
+-[x] command line arguments
+-[x] reading test to see words per minute
+-[x] get random excerpt for user to read
 
 
 ## Want to add
-[] works with all documents
-[x] have seperate argument for already known speed of user
+-[ ] works with all documents
+-[x] have seperate argument for already known speed of user
