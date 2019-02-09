@@ -8,7 +8,7 @@ the pdf that the person wants to read. It then gives the user sample
 text to read and calculates the words per minute. It then goes through
 the pdf and tries to figure out how long the user can read the pdf
 
-### Febuary 6 2019 Update
+#### Febuary 6, 2019 Update
 - finished program
 - added reading test
 - added reddit /r/todayilearned subreddit for reading test text
@@ -19,6 +19,8 @@ the pdf and tries to figure out how long the user can read the pdf
 - [x] command line arguments
 - [x] reading test to see words per minute
 - [x] get random excerpt for user to read
+- [ ] argument for how many words the book has
+    -[ ] calculate average line in a page * number of pages
 
 
 ## Want to add

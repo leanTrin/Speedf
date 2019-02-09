@@ -51,6 +51,9 @@ def getArgs():
             
             if(argv[i+1] == "-r"):
                 arguments.append(["r",argv[i+2]])
+            if(argv[i+1] == "-p"):
+                arguments.append(["p",argv[i+2]])
+
         except Exception as e:
             print(e)
     return arguments
@@ -150,7 +153,12 @@ def main():
     ###########
     #   MAIN PROGRAM
     ####################
+    
 
+
+    wordCountPDF = None
+    #TODO: check the error catches for; if you don't have the pdf but you know the word count
+    #      or how many lines is in one page
     #skip the reading test
     if(rate != None):
         # calculate the length to read the document
