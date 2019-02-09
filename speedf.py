@@ -30,10 +30,11 @@ def getSubmissions(amount):
 
 
 def argumentHelp():
-    print("help: ")
-    print(">speedf -r [rate] -i [filename.txt]")
-    print("r    How many words per minute can you read")
-    print("i    Where the file is located")
+    print("--help: ")
+    print(">speedf [OPTIONS] -i [filename.txt]")
+    print("-r [rate]        How many words per minute can you read")
+    print("-i [filename]    Where the file is located")
+    print("-h --help        Help page")
 
 def getTextFromPdf(filename):
     readPdf = PyPDF2.PdfFileReader(filename)
@@ -51,8 +52,9 @@ def getArgs():
             
             if(argv[i+1] == "-r"):
                 arguments.append(["r",argv[i+2]])
-            if(argv[i+1] == "-p"):
-                arguments.append(["p",argv[i+2]])
+            if(argv[i+1] == "-h" or argv[i+1] == "--help"):
+                argumentHelp()
+                exit(0)
 
         except Exception as e:
             print(e)
@@ -78,13 +80,8 @@ def pdfWordCount(content):
 def fileExist(filename):
 	return os.path.isfile(filename)
 
-def getParagraphExcerpt(content):
-    # TODO: this needs to be done
-    pass
 def wordsPerMinute(wordCount,minute):
     return wordCount/minute
-def timeToReadPdf(wpm):
-    return 1/wpm
 
 def getReadingRate():
     print("Please Wait...")
@@ -106,6 +103,7 @@ def getReadingRate():
 
     end = time.time()
     final = end - begin
+    print(pdfWordCount(text) / (final/60))
     return [pdfWordCount(text),final/60]
 def formatTime(seconds):
     m, s = divmod(seconds, 60)
@@ -117,12 +115,11 @@ def formatTime(seconds):
 def test():
     pass
 def main():
-    print("Loading...")
     
     arguments = getArgs()
     filename = getArgsValue(arguments,"i")
     rate = getArgsValue(arguments,"r")
-    
+    print("Loading...")
     # shows the help page when need more requirements
     if(filename == None or argsLength(arguments) > 2):
         print("[!] Check your Arguments")
@@ -155,10 +152,6 @@ def main():
     ####################
     
 
-
-    wordCountPDF = None
-    #TODO: check the error catches for; if you don't have the pdf but you know the word count
-    #      or how many lines is in one page
     #skip the reading test
     if(rate != None):
         # calculate the length to read the document
